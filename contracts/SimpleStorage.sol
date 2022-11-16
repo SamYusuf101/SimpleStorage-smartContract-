@@ -3,6 +3,9 @@ pragma solidity 0.8.8; // solidity version
 
 contract SimpleStorage {
     uint256  MyNumber;
+    mapping(string=>uint256) public nameToNumber;
+    mapping(uint256=>string) public NumberToName;
+
 
     People[] public people;
 
@@ -20,8 +23,12 @@ contract SimpleStorage {
     }
 
     function addPeople (string memory _name, uint256 _MyNumber) public {
-          People memory newPeople= People({MyNumber:_MyNumber, name:_name});
-          people.push(newPeople);
+         
+          people.push(People(_MyNumber, _name));
+          nameToNumber[_name] =_MyNumber;
+          NumberToName[_MyNumber] =_name;
+
+          
     }
     
 }
